@@ -1,0 +1,10 @@
+{
+  "realm": "Fuel-Link",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "none",
+  "resource": "api",
+  "credentials": {
+    "secret": "n6wf1sybI0YsZcmxNtgVUq66ewPozni1"
+  },
+  "confidential-port": 0
+}
