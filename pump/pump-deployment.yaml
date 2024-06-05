@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: auth-pump
+  name: auth-pump
+  namespace: egs-fuellink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: auth-pump
+  template:
+    metadata:
+      labels:
+        io.kompose.network/auth-default: "true"
+        io.kompose.service: auth-pump
+    spec:
+      containers:
+        - image: registry.deti/egs-fuellink/auth-pump
+          name: auth-pump
+          resources: {}

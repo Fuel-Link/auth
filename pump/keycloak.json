@@ -1,0 +1,7 @@
+{
+  "realm": "Fuel-Link",
+  "auth-server-url": "http://grupo1-egs-deti.ua.pt/keycloak",
+  "ssl-required": "none",
+  "resource": "pump",
+  "confidential-port": 0
+}

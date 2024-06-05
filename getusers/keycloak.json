@@ -1,0 +1,7 @@
+{
+  "realm": "Fuel-Link",
+  "auth-server-url": "http://auth-keycloak:8080/keycloak",
+  "ssl-required": "none",
+  "resource": "api",
+  "confidential-port": 0
+}

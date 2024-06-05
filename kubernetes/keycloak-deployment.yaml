@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth-keycloak
+  name: auth-keycloak
+  namespace: egs-fuellink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-keycloak
+  template:
+    metadata:
+      labels:
+        io.kompose.network/auth-default: "true"
+        app: auth-keycloak
+    spec:
+      containers:
+        - args: ["start", "--optimized"]
+          env:
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: /keycloak
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
+            - name: KEYCLOAK_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: auth-keycloak-secret
+                  key: user
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-keycloak-secret
+                  key: user
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_SCHEMA
+              value: public
+            - name: KC_DB_URL_DATABASE
+              value: keycloak
+            - name: KC_DB_URL_HOST
+              value: "auth-postgres-0.auth-postgres.egs-fuellink.svc.cluster.local"
+            - name: KC_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: auth-postgres-secret
+                  key: user
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-postgres-secret
+                  key: password
+          image: registry.deti/egs-fuellink/keycloak
+          name: auth-keycloak
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"

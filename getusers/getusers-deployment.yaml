@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: auth-getusers
+  name: auth-getusers
+  namespace: egs-fuellink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: auth-getusers
+  template:
+    metadata:
+      labels:
+        io.kompose.network/auth-default: "true"
+        io.kompose.service: auth-getusers
+    spec:
+      containers:
+        - image: registry.deti/egs-fuellink/auth-getusers
+          name: auth-getusers
+          resources: {}

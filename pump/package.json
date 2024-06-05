@@ -1,0 +1,21 @@
+{
+    "name": "pump",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "4.19.2",
+        "express-session": "1.18.0",
+        "kafkajs": "^2.2.4",
+        "keycloak-connect": "24.0.2",
+        "keycloak-js": "^24.0.4",
+        "koa": "^2.15.3",
+        "node-fetch": "^3.3.2"
+    }
+}
